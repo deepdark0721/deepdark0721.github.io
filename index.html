@@ -23,6 +23,7 @@ html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--text);font-family:var(--sans);line-height:1.7;-webkit-font-smoothing:antialiased}
 a{color:var(--cyan);text-decoration:none}
 a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible,textarea:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 img{max-width:100%;height:auto;display:block}
 .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
 
@@ -51,6 +52,7 @@ section{padding:72px 0;border-bottom:1px solid var(--line)}
 .identity{font-size:15px;color:var(--text-dim);margin-bottom:8px}
 .focus{font-size:15px;color:var(--text-dim)}
 .focus strong{color:var(--text);font-weight:600}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
 
 /* 02 evidence */
 .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px}
@@ -74,6 +76,7 @@ section{padding:72px 0;border-bottom:1px solid var(--line)}
 .deliver-list{list-style:none;display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
 .deliver-list li{background:var(--bg-card);border:1px solid var(--line);border-radius:10px;padding:20px 22px;font-size:15px}
 .deliver-list li strong{display:block;color:var(--gold);font-family:var(--mono);font-size:12px;letter-spacing:.1em;margin-bottom:6px;font-weight:600}
+.deliver-list li a{display:inline-block;margin-top:10px;font-size:13px;color:var(--cyan)}
 
 /* 04 system */
 .sys-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
@@ -94,6 +97,7 @@ section{padding:72px 0;border-bottom:1px solid var(--line)}
 .contact-info h3{font-size:20px;margin-bottom:12px}
 .contact-info p{font-size:15px;color:var(--text-dim);margin-bottom:20px}
 .btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px}
+.copy-text{width:100%;min-height:88px;background:var(--bg-card);color:var(--text);border:1px solid var(--line);border-radius:6px;padding:12px 14px;font-family:var(--sans);font-size:14px;line-height:1.7;resize:vertical;margin-bottom:16px}
 .btn{font-family:var(--sans);font-size:14px;padding:10px 22px;border-radius:6px;cursor:pointer;border:1px solid var(--line);background:var(--bg-card);color:var(--text);transition:all .15s}
 .btn-primary{background:var(--gold);border-color:var(--gold);color:#0a1628;font-weight:700}
 .btn-primary:hover{filter:brightness(1.1)}
@@ -131,7 +135,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--text-dim)}
 <header>
   <div class="wrap nav">
     <span class="brand">MEI · AI LEVERAGE</span>
-    <button class="menu-btn" id="menuBtn" aria-label="菜单">MENU</button>
+    <button class="menu-btn" id="menuBtn" aria-label="菜单" aria-expanded="false" aria-controls="navLinks">MENU</button>
     <ul class="nav-links" id="navLinks">
       <li><a href="#pos">定位</a></li>
       <li><a href="#evi">证据</a></li>
@@ -156,6 +160,10 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--text-dim)}
     <p class="sub">把一个人跑成一个团队</p>
     <p class="identity">上海第二工业大学 · 机械工程大二 · AI Agent 实践者</p>
     <p class="focus">主攻：<strong>AI Agent / AI×机械交叉</strong>（具身智能、工业 AI）</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="#evi">看实际成果</a>
+      <a class="btn" href="#con">联系交流</a>
+    </div>
   </div>
 </section>
 
@@ -164,14 +172,14 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--text-dim)}
   <div class="wrap">
     <p class="sec-label">02 / EVIDENCE</p>
     <h2 class="sec-title">证据</h2>
-    <div class="filters" id="filters">
-      <button class="on" data-f="all">全部</button>
-      <button data-f="oss">开源</button>
-      <button data-f="kb">知识库</button>
-      <button data-f="sys">系统</button>
-      <button data-f="imp">影响</button>
-      <button data-f="field">观察</button>
-      <button data-f="aca">学业</button>
+    <div class="filters" id="filters" aria-label="证据分类">
+      <button class="on" data-f="all" aria-pressed="true">全部</button>
+      <button data-f="oss" aria-pressed="false">开源</button>
+      <button data-f="kb" aria-pressed="false">知识库</button>
+      <button data-f="sys" aria-pressed="false">系统</button>
+      <button data-f="imp" aria-pressed="false">影响</button>
+      <button data-f="field" aria-pressed="false">观察</button>
+      <button data-f="aca" aria-pressed="false">学业</button>
     </div>
     <div class="cards" id="cards">
 
@@ -233,10 +241,10 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--text-dim)}
     <p class="sec-label">03 / DELIVER</p>
     <h2 class="sec-title">交付 · 我能做什么</h2>
     <ul class="deliver-list">
-      <li><strong>TEACH</strong>AI 入门到 Agent 实战的教学</li>
-      <li><strong>KNOWLEDGE</strong>个人知识库结构搭建</li>
-      <li><strong>WORKFLOW</strong>多 AI 协作工作流</li>
-      <li><strong>MINUTES</strong>会议 / 活动纪要站（会后 2 小时出链接）</li>
+      <li><strong>TEACH</strong>AI 入门到 Agent 实战的教学<a href="#con">交流学习需求 →</a></li>
+      <li><strong>KNOWLEDGE</strong>个人知识库结构搭建<a href="#con">交流知识整理需求 →</a></li>
+      <li><strong>WORKFLOW</strong>多 AI 协作工作流<a href="#con">交流流程需求 →</a></li>
+      <li><strong>MINUTES</strong>会议 / 活动纪要站（会后 2 小时出链接）<a href="#con">交流纪要需求 →</a></li>
     </ul>
   </div>
 </section>
@@ -250,7 +258,7 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--text-dim)}
       <div class="sys-card">
         <p class="layer">FREE TIER</p>
         <h3>免费层</h3>
-        <p>知识库 + 公众号，全部内容开放阅读。</p>
+        <p>知识库 + 公众号，免费阅读。</p>
         <span class="st st-live">LIVE</span>
       </div>
       <div class="sys-card">
@@ -282,6 +290,8 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--text-dim)}
       <div class="contact-info">
         <h3>扫码加微信，或先复制一句开场</h3>
         <p>说明来意即可——教学、知识库搭建、多 AI 工作流、纪要站，看到都会回。</p>
+        <label for="contactText" class="sr-only" style="position:absolute;left:-9999px">联系话术</label>
+        <textarea class="copy-text" id="contactText" rows="3">你好，我在你的个人网站上看到你的 AI 实践（四端协作 / 知识库 / 开源桥接），想和你交流一下。我目前遇到的具体问题是：</textarea>
         <div class="btn-row">
           <button class="btn btn-primary" id="copyBtn">复制联系话术</button>
           <a class="btn" href="https://github.com/deepdark0721" target="_blank" rel="noopener">GitHub</a>
@@ -307,41 +317,57 @@ footer p{font-family:var(--mono);font-size:12px;color:var(--text-dim)}
 
 <script>
 (function(){
-  var SCRIPT = "你好，我在你的个人网站上看到你的 AI 实践（四端协作 / 知识库 / 开源桥接），想和你交流一下。";
-
   // mobile menu
   var btn = document.getElementById('menuBtn');
   var links = document.getElementById('navLinks');
-  btn.addEventListener('click', function(){ links.classList.toggle('open'); });
-  links.addEventListener('click', function(e){ if(e.target.tagName==='A') links.classList.remove('open'); });
+  btn.addEventListener('click', function(){
+    var open = links.classList.toggle('open');
+    btn.setAttribute('aria-expanded', String(open));
+  });
+  links.addEventListener('click', function(e){
+    if(e.target.tagName==='A'){ links.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+  });
 
   // filters
   var fbox = document.getElementById('filters');
   var cards = document.querySelectorAll('.card');
   fbox.addEventListener('click', function(e){
     var b = e.target.closest('button'); if(!b) return;
-    fbox.querySelectorAll('button').forEach(function(x){ x.classList.remove('on'); });
-    b.classList.add('on');
+    fbox.querySelectorAll('button').forEach(function(x){
+      x.classList.remove('on'); x.setAttribute('aria-pressed','false');
+    });
+    b.classList.add('on'); b.setAttribute('aria-pressed','true');
     var f = b.getAttribute('data-f');
     cards.forEach(function(c){
       c.classList.toggle('hidden', f!=='all' && c.getAttribute('data-cat')!==f);
     });
   });
 
-  // copy script
+  // copy contact script (with fallback + manual-copy hint)
   var cbtn = document.getElementById('copyBtn');
+  var field = document.getElementById('contactText');
   var toast = document.getElementById('toast');
   cbtn.addEventListener('click', function(){
-    function done(){ toast.classList.add('show'); setTimeout(function(){ toast.classList.remove('show'); }, 1600); }
+    var text = field.value;
+    function done(msg){
+      toast.textContent = msg || '已复制';
+      toast.classList.add('show');
+      setTimeout(function(){ toast.classList.remove('show'); }, 2200);
+    }
+    function manual(){
+      field.focus(); field.select();
+      done('自动复制失败，已选中文字，请手动复制。');
+    }
     if(navigator.clipboard && navigator.clipboard.writeText){
-      navigator.clipboard.writeText(SCRIPT).then(done, fallback);
-    } else { fallback(); }
-    function fallback(){
+      navigator.clipboard.writeText(text).then(function(){ done('已复制'); }, manual);
+    } else {
       var ta = document.createElement('textarea');
-      ta.value = SCRIPT; ta.style.position='fixed'; ta.style.opacity='0';
+      ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
       document.body.appendChild(ta); ta.select();
-      try{ document.execCommand('copy'); done(); }catch(err){}
+      var ok = false;
+      try{ ok = document.execCommand('copy'); }catch(err){}
       document.body.removeChild(ta);
+      if(ok){ done('已复制'); } else { manual(); }
     }
   });
 })();
